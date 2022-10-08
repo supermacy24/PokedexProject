@@ -8,6 +8,8 @@
     <script type="text/javascript" src="js/lib/jquery 3.6.1/jquery.js"></script>
     <script type="text/javascript" src="js/pokemonAPI.js"></script>
     <script type="text/javascript" src="js/pokemonDisplay.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,11 +37,14 @@
         </div>
 
         <div id="detailsScreen">
-            <div id="showDetails">
-                <div id="pokemonPic"></div>
-                <div id="pokemonName"></div>
-                <div id="pokemonTypes"></div>
-            </div>
+            <a id="openModal" href="#modal-pokemon" rel="modal:open">
+
+                <div id="showDetails">
+                    <div id="pokemonPic"></div>
+                    <div id="pokemonName"></div>
+                    <div id="pokemonTypes"></div>
+                </div>
+            </a>
         </div>
 
     </div>
@@ -70,6 +75,13 @@
         </div>
         <hr>
     </div>
+
+    
+    <form id="modal-pokemon" class="modal">
+        NOT IMPLEMENTED
+    </form>
+      <!-- <a href="#login-form" rel="modal:open">Login</a> -->
+
 </body>
 
 </html>

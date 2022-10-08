@@ -1,30 +1,40 @@
 
 $(function () {
-    $('#menu').mouseover('click', function(){
+    $('#menu').mouseover('click', function () {
         showMenu();
-         
-     })
-     $('#mySidenav').mouseleave('click', function(){
-       closeMenu();
-     })
-    $('#typeFilterArrowDown').on('click',function(){
+
+    })
+    $('#mySidenav').mouseleave('click', function () {
+        closeMenu();
+    })
+    $('#typeFilterArrowDown').on('click', function () {
         showFilterType();
     })
 })
 
 function search(pokemons) {
     $('#searchPokemon').on('keyup', function () {
+        
         let searchInput = $('#searchPokemon').val()
         $.each(pokemons, function (index, pokemon) {
             if (pokemon.name == searchInput) {
                 pokemonPicShow(pokemon.id, pokemon.name, pokemon.sprite, pokemon.types)
+                
             }
             if ("#" + pokemon.id == searchInput) {
                 pokemonPicShow(pokemon.id, pokemon.name, pokemon.sprite, pokemon.types)
+                
             }
         })
-        if(searchInput == ""){
+        if (searchInput == "") {
             $('#showDetails').css("display", "none")
+            $('.pokeSingleLine').css({
+                'background-color':'transparent',
+                'color':'white',
+                'border':'none'
+                
+            })
+
         }
 
     })
@@ -52,11 +62,11 @@ function pokemonPicShow(id, name, sprite, types) {
 
     // })
     let labelDivLastSearch = $('#lastSearched label');
-    if(labelDivLastSearch.length==9){
-       $('#lastSearched').find(":first-child").remove();
+    if (labelDivLastSearch.length == 9) {
+        $('#lastSearched').find(":first-child").remove();
     }
 
-    let lastSearched = "<label class='labelSearched' style='cursor:pointer' data-type ='" + types + "' onclick='pokemonPicShow(" + id + ",\"" + name + "\",\"" + sprite + "\",\"" + types + "\")' >"+name.substring(0, 1).toUpperCase() + name.substring(1)+"</label>"
+    let lastSearched = "<label class='labelSearched' style='cursor:pointer' data-type ='" + types + "' onclick='pokemonPicShow(" + id + ",\"" + name + "\",\"" + sprite + "\",\"" + types + "\")' >" + name.substring(0, 1).toUpperCase() + name.substring(1) + "</label>"
 
     if (types.includes('bug')) {
         typeImg = "<img class='pokeType' title='Bug' src='assets/types/bug.svg'/>"
@@ -133,9 +143,26 @@ function pokemonPicShow(id, name, sprite, types) {
 
     $('#pokemonPic').empty();
     $('#showDetails').css("display", "block")
-    
 
-   
+    $('.pokeSingleLine').css({
+        'background-color':'transparent',
+        'color':'white',
+        'border':'none'
+        
+    })
+
+    
+    $('#'+id).css({
+
+        'background-color': ' white',
+        'color': 'rgb(17,17,17,1)',
+        'border':'1px solid white',
+        'border-radius':'5px'
+    })
+
+
+
+
     $('#lastSearched').append(lastSearched)
 
     let pic = "<img style='width:100px' src='" + sprite + "'/>"
@@ -145,54 +172,48 @@ function pokemonPicShow(id, name, sprite, types) {
 }
 
 
-// function pokemonListDisplay(pokemon) {
-   
-//     let pokemonRow = "<h2 style='cursor:pointer' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/>" + pokemon.name + "</h2>"
-//     $('#pokemon').append(pokemonRow)
-
-// }
-
 function pokemonListDisplay(pokemons) {
     //console.table(pokemons)
-    
-   $.each(pokemons,function(index,pokemon){
-       let pokemonRow = "<h2 style='cursor:pointer' id='" + pokemon.id +"' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/> # " + pokemon.id + " " + pokemon.name + "</h2>"
 
-      $('#pokemon').append(pokemonRow)
-       $("#pokemon h2").sort(function(a, b) {
-        return parseInt(a.id) - parseInt(b.id);
-      }).each(function() {
-        var elem = $(this);
-        elem.remove();
-        $(elem).appendTo("#pokemon");
-      });
-   })
-   
+    $.each(pokemons, function (index, pokemon) {
+        let pokemonRow = "<h2 style='cursor:pointer' clicked='false' class='pokeSingleLine' id='" + pokemon.id + "' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/> # " + pokemon.id + " " + pokemon.name + "</h2>"
+
+        $('#pokemon').append(pokemonRow)
+        //Organiza a lista 
+        $("#pokemon h2").sort(function (a, b) {
+            return parseInt(a.id) - parseInt(b.id);
+        }).each(function () {
+            var elem = $(this);
+            elem.remove();
+            $(elem).appendTo("#pokemon");
+        });
+    })
+
 
 }
 
 
 
-function showMenu(){
+function showMenu() {
 
-    $('#mySidenav').css("width","300px");
+    $('#mySidenav').css("width", "300px");
     // $('#body').css("background-color","rgba(0,0,0,0.4)")
 
 }
 
-function closeMenu(){
+function closeMenu() {
 
-    $('#mySidenav').css("width","0px");
+    $('#mySidenav').css("width", "0px");
 
-    if($('#filterType').is(':visible')){
+    if ($('#filterType').is(':visible')) {
 
         $('#filterType').hide();
     }
     // $('#body').css("background-color","#FFF")
-    
-    
+
+
 }
 
-function showFilterType(){
- $('#filterType').slideToggle("slow");
+function showFilterType() {
+    $('#filterType').slideToggle("slow");
 }

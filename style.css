@@ -110,6 +110,9 @@ header {
   height: inherit;
 
 }
+.pokeSingleLine:hover{
+  padding: 1px;
+}
 
 #pokemon {
   padding: 30px;
