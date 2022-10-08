@@ -1,7 +1,7 @@
+let pokemonObject ={};
 $(function () {
 
  
-  let pokemonObject ={};
 
   fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(response => response.json())
@@ -36,7 +36,7 @@ $(function () {
 
         let pokemonArray=[pokemonObject]
         
-        pokemonListDisplay(pokemonObject)
+        pokemonListDisplay(pokemonArray)
         search(pokemonArray)
       })
   }
