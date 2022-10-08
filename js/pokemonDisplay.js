@@ -32,7 +32,7 @@ function search(pokemons) {
 
 function pokemonPicShow(id, name, sprite, types) {
     var typesTemp = [types]
-    console.log(typesTemp)
+    //console.log(typesTemp)
     var typeImg;
 
     $('#pokemonTypes').empty()
@@ -145,13 +145,31 @@ function pokemonPicShow(id, name, sprite, types) {
 }
 
 
-function pokemonListDisplay(pokemon) {
+// function pokemonListDisplay(pokemon) {
    
-    let pokemonRow = "<h2 style='cursor:pointer' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/>" + pokemon.name + "</h2>"
-    $('#pokemon').append(pokemonRow)
+//     let pokemonRow = "<h2 style='cursor:pointer' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/>" + pokemon.name + "</h2>"
+//     $('#pokemon').append(pokemonRow)
+
+// }
+
+function pokemonListDisplay(pokemons) {
+    //console.table(pokemons)
+    
+   $.each(pokemons,function(index,pokemon){
+       let pokemonRow = "<h2 style='cursor:pointer' id='" + pokemon.id +"' onclick='pokemonPicShow(" + pokemon.id + ",\"" + pokemon.name + "\",\"" + pokemon.sprite + "\",\"" + pokemon.types + "\")'><img style = 'width:25px;vertical-align: middle;margin-right: 10px;' src='assets/pokeball.svg'/> # " + pokemon.id + " " + pokemon.name + "</h2>"
+
+      $('#pokemon').append(pokemonRow)
+       $("#pokemon h2").sort(function(a, b) {
+        return parseInt(a.id) - parseInt(b.id);
+      }).each(function() {
+        var elem = $(this);
+        elem.remove();
+        $(elem).appendTo("#pokemon");
+      });
+   })
+   
 
 }
-
 
 
 
